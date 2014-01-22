@@ -1,4 +1,4 @@
 scripts
 =======
 
-scripts and other useful items for configuring the RPV
+scripts and other useful items for configuring the ROV
