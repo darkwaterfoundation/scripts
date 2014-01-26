@@ -1,0 +1,97 @@
+/*
+ * Copyright (C) 2014 Shrkey, Dark Water Foundation        <barry@shrkey.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+/dts-v1/;
+/plugin/;
+
+/ {
+        compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+        /* identification */
+        part-number = "BB-BONE-JULIUS";
+        version = "00A0";
+
+        /* state the resources this cape uses */
+        exclusive-use =
+                /* the pin header P8 uses */
+                "P9.14", /* PWM - ehrpwm1b - vertical thruster   	*/
+                "P9.16", /* PWM - ehrpwm1a - servo 1                */
+                /* the pin header P9 uses */
+                "P9.21", /* PWM - ehrpwm0b - left thruster          */
+				"P9.22", /* PWM - ehrpwm0a - right thruster         */
+				/* Hardware IP cores in use */
+				"ehrpwm0a",
+				"ehrpwm0b",
+				"ehrpwm1a",
+				"ehrpwm1b";
+
+        fragment@0 {
+                target = <&am33xx_pinmux>;
+                __overlay__ {
+                        julius_direction_pwm_left: pinmux_julius_direction_pwm_left {
+                                pinctrl-single,pins = <0x154  0x3>; /* P9_21 (ZCZ ball B17) | MODE 3 */
+                        };
+                        julius_direction_pwm_right: pinmux_julius_direction_pwm_right {
+                                pinctrl-single,pins = <0x150  0x3>; /* P9_22 (ZCZ ball A17) | MODE 3 */
+                        };
+                        julius_direction_pwm_depth: pinmux_julius_direction_pwm_depth {
+                                pinctrl-single,pins = <0x048  0x6>; /* P9_14 (ZCZ ball U14) | MODE 6 */
+                        };
+                        julius_direction_pwm_servo: pinmux_julius_direction_pwm_servo {
+                                pinctrl-single,pins = <0x04c  0x6>; /* P9_16 (ZCZ ball T14) | MODE 6 */
+                        };                                        
+                };
+        };
+		
+		fragment@1 {
+		        target = <&ocp>;
+		        __overlay__ {
+		            julius_pwm_direction_left {
+		                compatible    = "pwm_test";
+		                pwms         = <&ehrpwm0a 0 500000 0>;
+		                pwm-names     = "julius_pwm_direction_left";
+		                pinctrl-names    = "default";
+		                pinctrl-0    = <&julius_direction_pwm_left>;
+		                enabled        = <0>;
+		                duty        = <0>;
+		                status         = "okay";
+		            };
+		            julius_pwm_direction_right {
+		                compatible    = "pwm_test";
+		                pwms         = <&ehrpwm0b 0 500000 0>;
+		                pwm-names     = "julius_pwm_direction_right";
+		                pinctrl-names    = "default";
+		                pinctrl-0    = <&julius_direction_pwm_right>;
+		                enabled        = <0>;
+		                duty        = <0>;
+		                status         = "okay";
+		            };
+		            julius_pwm_depth {
+		                compatible    = "pwm_test";
+		                pwms         = <&ehrpwm1a 0 500000 0>;
+		                pwm-names     = "julius_pwm_depth";
+		                pinctrl-names    = "default";
+		                pinctrl-0    = <&julius_direction_pwm_depth>;
+		                enabled        = <0>;
+		                duty        = <0>;
+		                status         = "okay";
+		            };
+		            julius_pwm_servo {
+		                compatible    = "pwm_test";
+		                pwms         = <&ehrpwm1b 0 500000 0>;
+		                pwm-names     = "julius_pwm_servo";
+		                pinctrl-names    = "default";
+		                pinctrl-0    = <&julius_direction_pwm_servo>;
+		                enabled        = <0>;
+		                duty        = <0>;
+		                status         = "okay";
+		            };
+		        };
+		    };
+
+
+};
