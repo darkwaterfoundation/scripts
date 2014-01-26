@@ -52,7 +52,7 @@
 		        __overlay__ {
 		            julius_pwm_direction_left {
 		                compatible    = "pwm_test";
-		                pwms         = <&ehrpwm0a 0 500000 0>;
+		                pwms         = <&ehrpwm0 0 500000 0>;
 		                pwm-names     = "julius_pwm_direction_left";
 		                pinctrl-names    = "default";
 		                pinctrl-0    = <&julius_direction_pwm_left>;
@@ -62,7 +62,7 @@
 		            };
 		            julius_pwm_direction_right {
 		                compatible    = "pwm_test";
-		                pwms         = <&ehrpwm0b 0 500000 0>;
+		                pwms         = <&ehrpwm0 0 500000 0>;
 		                pwm-names     = "julius_pwm_direction_right";
 		                pinctrl-names    = "default";
 		                pinctrl-0    = <&julius_direction_pwm_right>;
@@ -72,7 +72,7 @@
 		            };
 		            julius_pwm_depth {
 		                compatible    = "pwm_test";
-		                pwms         = <&ehrpwm1a 0 500000 0>;
+		                pwms         = <&ehrpwm1 0 500000 0>;
 		                pwm-names     = "julius_pwm_depth";
 		                pinctrl-names    = "default";
 		                pinctrl-0    = <&julius_direction_pwm_depth>;
@@ -82,7 +82,7 @@
 		            };
 		            julius_pwm_servo {
 		                compatible    = "pwm_test";
-		                pwms         = <&ehrpwm1b 0 500000 0>;
+		                pwms         = <&ehrpwm1 0 500000 0>;
 		                pwm-names     = "julius_pwm_servo";
 		                pinctrl-names    = "default";
 		                pinctrl-0    = <&julius_direction_pwm_servo>;
