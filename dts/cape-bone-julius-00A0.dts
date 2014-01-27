@@ -52,7 +52,7 @@
 		        __overlay__ {
 		            julius_pwm_direction_left {
 		                compatible    = "pwm_test";
-		                pwms         = <&ehrpwm0 0 500000 0>;
+		                pwms         = <&ehrpwm0 1 500000 0>;
 		                pwm-names     = "julius_pwm_direction_left";
 		                pinctrl-names    = "default";
 		                pinctrl-0    = <&julius_direction_pwm_left>;
@@ -82,7 +82,7 @@
 		            };
 		            julius_pwm_servo {
 		                compatible    = "pwm_test";
-		                pwms         = <&ehrpwm1 0 500000 0>;
+		                pwms         = <&ehrpwm1 1 500000 0>;
 		                pwm-names     = "julius_pwm_servo";
 		                pinctrl-names    = "default";
 		                pinctrl-0    = <&julius_direction_pwm_servo>;
