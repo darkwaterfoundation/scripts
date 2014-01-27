@@ -1,4 +1,6 @@
 scripts
 =======
 
-scripts and other useful items for configuring the ROV
+The DTS ( device tree overlay source ) file for the Julius Beaglebone Black cape, and a build and overlay script for testing.
+
+More documentation / notes will be here soon and available at [shrkey.com](http://www.shrkey.com)
