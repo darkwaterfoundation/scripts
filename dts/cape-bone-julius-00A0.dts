@@ -32,16 +32,16 @@
         fragment@0 {
                 target = <&am33xx_pinmux>;
                 __overlay__ {
-                        julius_direction_pwm_left: pinmux_julius_direction_pwm_left {
+                        julius_pwm_direction_left: pinmux_julius_pwm_direction_left {
                                 pinctrl-single,pins = <0x154  0x3>; /* P9_21 (ZCZ ball B17) | MODE 3 */
                         };
-                        julius_direction_pwm_right: pinmux_julius_direction_pwm_right {
+                        julius_pwm_direction_right: pinmux_julius_pwm_direction_right {
                                 pinctrl-single,pins = <0x150  0x3>; /* P9_22 (ZCZ ball A17) | MODE 3 */
                         };
-                        julius_direction_pwm_depth: pinmux_julius_direction_pwm_depth {
+                        julius_pwm_depth: pinmux_julius_pwm_depth {
                                 pinctrl-single,pins = <0x048  0x6>; /* P9_14 (ZCZ ball U14) | MODE 6 */
                         };
-                        julius_direction_pwm_servo: pinmux_julius_direction_pwm_servo {
+                        julius_pwm_servo: pinmux_julius_pwm_servo {
                                 pinctrl-single,pins = <0x04c  0x6>; /* P9_16 (ZCZ ball T14) | MODE 6 */
                         };                                        
                 };
@@ -50,42 +50,42 @@
 		fragment@1 {
 		        target = <&ocp>;
 		        __overlay__ {
-		            julius_pwm_direction_left {
+		            pwm_direction_left {
 		                compatible    = "pwm_test";
 		                pwms         = <&ehrpwm0 1 500000 0>;
-		                pwm-names     = "julius_pwm_direction_left";
+		                pwm-names     = "pwm_direction_left";
 		                pinctrl-names    = "default";
-		                pinctrl-0    = <&julius_direction_pwm_left>;
+		                pinctrl-0    = <&julius_pwm_direction_left>;
 		                enabled        = <0>;
 		                duty        = <0>;
 		                status         = "okay";
 		            };
-		            julius_pwm_direction_right {
+		            pwm_direction_right {
 		                compatible    = "pwm_test";
 		                pwms         = <&ehrpwm0 0 500000 0>;
-		                pwm-names     = "julius_pwm_direction_right";
+		                pwm-names     = "pwm_direction_right";
 		                pinctrl-names    = "default";
-		                pinctrl-0    = <&julius_direction_pwm_right>;
+		                pinctrl-0    = <&julius_pwm_direction_right>;
 		                enabled        = <0>;
 		                duty        = <0>;
 		                status         = "okay";
 		            };
-		            julius_pwm_depth {
+		            pwm_depth {
 		                compatible    = "pwm_test";
 		                pwms         = <&ehrpwm1 0 500000 0>;
-		                pwm-names     = "julius_pwm_depth";
+		                pwm-names     = "pwm_direction_depth";
 		                pinctrl-names    = "default";
-		                pinctrl-0    = <&julius_direction_pwm_depth>;
+		                pinctrl-0    = <&julius_pwm_depth>;
 		                enabled        = <0>;
 		                duty        = <0>;
 		                status         = "okay";
 		            };
-		            julius_pwm_servo {
+		            pwm_servo {
 		                compatible    = "pwm_test";
 		                pwms         = <&ehrpwm1 1 500000 0>;
-		                pwm-names     = "julius_pwm_servo";
+		                pwm-names     = "pwm_servo";
 		                pinctrl-names    = "default";
-		                pinctrl-0    = <&julius_direction_pwm_servo>;
+		                pinctrl-0    = <&julius_pwm_servo>;
 		                enabled        = <0>;
 		                duty        = <0>;
 		                status         = "okay";
