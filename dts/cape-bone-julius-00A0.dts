@@ -38,7 +38,7 @@
                         julius_pwm_direction_right: pinmux_julius_pwm_direction_right {
                                 pinctrl-single,pins = <0x150  0x3>; /* P9_22 (ZCZ ball A17) | MODE 3 */
                         };
-                        julius_pwm_depth: pinmux_julius_pwm_depth {
+                        julius_pwm_direction_depth: pinmux_jjulius_pwm_direction_depth {
                                 pinctrl-single,pins = <0x048  0x6>; /* P9_14 (ZCZ ball U14) | MODE 6 */
                         };
                         julius_pwm_servo: pinmux_julius_pwm_servo {
@@ -70,12 +70,12 @@
 		                duty        = <0>;
 		                status         = "okay";
 		            };
-		            pwm_depth {
+		            pwm_direction_depth {
 		                compatible    = "pwm_test";
 		                pwms         = <&ehrpwm1 0 500000 0>;
 		                pwm-names     = "pwm_direction_depth";
 		                pinctrl-names    = "default";
-		                pinctrl-0    = <&julius_pwm_depth>;
+		                pinctrl-0    = <&julius_pwm_direction_depth>;
 		                enabled        = <0>;
 		                duty        = <0>;
 		                status         = "okay";
