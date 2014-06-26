@@ -17,17 +17,22 @@
 
         /* state the resources this cape uses */
         exclusive-use =
-                /* the pin header P8 uses */
+                /* the pin header P9 uses */
                 "P9.14", /* PWM - ehrpwm1b - vertical thruster   	*/
                 "P9.16", /* PWM - ehrpwm1a - servo 1                */
-                /* the pin header P9 uses */
                 "P9.21", /* PWM - ehrpwm0b - left thruster          */
 				"P9.22", /* PWM - ehrpwm0a - right thruster         */
+				/* lights */
+				"P8.34",		/* pwm: ehrpwm1B */
+				"P8.36",		/* pwm: ehrpwm1A */
+
 				/* Hardware IP cores in use */
 				"ehrpwm0a",
 				"ehrpwm0b",
 				"ehrpwm1a",
-				"ehrpwm1b";
+				"ehrpwm1b",
+				"ehrpwm1A",
+				"ehrpwm1B";
 
         fragment@0 {
                 target = <&am33xx_pinmux>;
@@ -38,12 +43,18 @@
                         julius_pwm_direction_right: pinmux_julius_pwm_direction_right {
                                 pinctrl-single,pins = <0x150  0x3>; /* P9_22 (ZCZ ball A17) | MODE 3 */
                         };
-                        julius_pwm_direction_depth: pinmux_jjulius_pwm_direction_depth {
+                        julius_pwm_direction_depth: pinmux_julius_pwm_direction_depth {
                                 pinctrl-single,pins = <0x048  0x6>; /* P9_14 (ZCZ ball U14) | MODE 6 */
                         };
                         julius_pwm_servo: pinmux_julius_pwm_servo {
                                 pinctrl-single,pins = <0x04c  0x6>; /* P9_16 (ZCZ ball T14) | MODE 6 */
-                        };                                        
+                        };
+                        julius_pwm_led_array_one: pinmux_julius_pwm_led_array_one {
+								pinctrl-single,pins = <0x0cc  0x2>; /* P8_34 (ZCZ ball U4) | MODE 2 */
+						};
+						julius_pwm_led_array_two: pinmux_julius_pwm_led_array_two {
+								pinctrl-single,pins = <0x0c8  0x2>; /* P8_36 (ZCZ ball U3) | MODE 2 */
+						};                                        
                 };
         };
 		
@@ -90,6 +101,26 @@
 		                duty        = <0>;
 		                status         = "okay";
 		            };
+		            pwm_led_array_one {
+						compatible	= "pwm_test";
+						pwms 		= <&ehrpwm1 1 20000000 0>;
+						pwm-names 	= "pwm_led_array_one";
+					    pinctrl-names	= "default";
+					    pinctrl-0	= <&julius_pwm_led_array_one>;
+						enabled		= <0>;
+						duty		= <0>;
+						status 		= "okay";
+					};
+					pwm_led_array_two {
+						compatible	= "pwm_test";
+						pwms 		= <&ehrpwm1 0 20000000 0>;
+						pwm-names 	= "pwm_led_array_two";
+					    pinctrl-names	= "default";
+					    pinctrl-0	= <&julius_pwm_led_array_two>;
+						enabled		= <0>;
+						duty		= <0>;
+						status 		= "okay";
+					};
 		        };
 		    };
 
