@@ -23,16 +23,16 @@
                 "P9.21", /* PWM - ehrpwm0b - left thruster          */
 				"P9.22", /* PWM - ehrpwm0a - right thruster         */
 				/* lights */
-				"P8.34",		/* pwm: ehrpwm1B */
-				"P8.36",		/* pwm: ehrpwm1A */
+				"P8.13",		/* pwm: ehrpwm2B */
+				"P8.19",		/* pwm: ehrpwm2A */
 
 				/* Hardware IP cores in use */
 				"ehrpwm0a",
 				"ehrpwm0b",
 				"ehrpwm1a",
 				"ehrpwm1b",
-				"ehrpwm1A",
-				"ehrpwm1B";
+				"ehrpwm2A",
+				"ehrpwm2B";
 
         fragment@0 {
                 target = <&am33xx_pinmux>;
@@ -50,10 +50,10 @@
                                 pinctrl-single,pins = <0x04c  0x6>; /* P9_16 (ZCZ ball T14) | MODE 6 */
                         };
                         julius_pwm_led_array_one: pinmux_julius_pwm_led_array_one {
-								pinctrl-single,pins = <0x0cc  0x2>; /* P8_34 (ZCZ ball U4) | MODE 2 */
+								pinctrl-single,pins = <0x024  0x4>; /* P8_13 (ZCZ ball T10) | MODE 4 */
 						};
 						julius_pwm_led_array_two: pinmux_julius_pwm_led_array_two {
-								pinctrl-single,pins = <0x0c8  0x2>; /* P8_36 (ZCZ ball U3) | MODE 2 */
+								pinctrl-single,pins = <0x020  0x4>; /* P8_19 (ZCZ ball U10) | MODE 4 */
 						};                                        
                 };
         };
@@ -103,7 +103,7 @@
 		            };
 		            pwm_led_array_one {
 						compatible	= "pwm_test";
-						pwms 		= <&ehrpwm1 1 20000000 0>;
+						pwms 		= <&ehrpwm2 1 20000000 0>;
 						pwm-names 	= "pwm_led_array_one";
 					    pinctrl-names	= "default";
 					    pinctrl-0	= <&julius_pwm_led_array_one>;
@@ -113,7 +113,7 @@
 					};
 					pwm_led_array_two {
 						compatible	= "pwm_test";
-						pwms 		= <&ehrpwm1 0 20000000 0>;
+						pwms 		= <&ehrpwm2 0 20000000 0>;
 						pwm-names 	= "pwm_led_array_two";
 					    pinctrl-names	= "default";
 					    pinctrl-0	= <&julius_pwm_led_array_two>;
