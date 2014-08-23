@@ -25,6 +25,9 @@
 				/* lights */
 				"P8.13",		/* pwm: ehrpwm2B */
 				"P8.19",		/* pwm: ehrpwm2A */
+				/* serial port */
+				"P8.37",	/* uart5_txd */
+				"P8.38",	/* uart5_rxd */
 
 				/* Hardware IP cores in use */
 				"ehrpwm0a",
@@ -32,7 +35,8 @@
 				"ehrpwm1a",
 				"ehrpwm1b",
 				"ehrpwm2A",
-				"ehrpwm2B";
+				"ehrpwm2B",
+				"uart5";
 
         fragment@0 {
                 target = <&am33xx_pinmux>;
@@ -54,7 +58,15 @@
 						};
 						julius_pwm_led_array_two: pinmux_julius_pwm_led_array_two {
 								pinctrl-single,pins = <0x020  0x4>; /* P8_19 (ZCZ ball U10) | MODE 4 */
-						};                                        
+						}; 
+						bb_uart5_pins: pinmux_bb_uart5_pins {
+								pinctrl-single,pins = <
+								/* the uart pins */
+								0x0C4 0x24	/* lcd_data9.uart5_rxd | MODE4 */
+								0x0C0 0x04	/* lcd_data8.uart5_txd | MODE4 */
+								>;
+						};                                       
+
                 };
         };
 		
@@ -124,5 +136,12 @@
 		        };
 		    };
 
-
+		fragment@2 {
+			target = <&uart6>;	/* really uart5 */
+			__overlay__ {
+				status = "okay";
+				pinctrl-names = "default";
+				pinctrl-0 = <&bb_uart5_pins>;
+			};
+		};
 };
